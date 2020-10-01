@@ -1,13 +1,16 @@
-import character from './character';
-
-export default function getSpecial({ special: arr } = character) {
-  const copy = arr;
-  for (let i = 0; i < copy.length; i += 1) {
-    if ('description' in copy[i] === false) {
-      copy[i].description = 'Описание недоступно';
-    }
+export default function getSpecial(character) {
+  const copy = { ...character };
+  const { special } = copy;
+  const result = [];
+  for (let i = 0; i < special.length; i += 1) {
+    const {
+      id, name, icon, description = 'Описание недоступно',
+    } = special[i];
+    result.push({
+      id, name, icon, description,
+    });
   }
   // eslint-disable-next-line no-console
-  console.log(copy);
-  return copy;
+  console.log(result);
+  return result;
 }
